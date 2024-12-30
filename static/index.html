@@ -55,7 +55,7 @@
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = "2024_2025_1_exam_schedule.ics";
+          a.download = `2024_2025_1_exam_schedule_${userAccount}.ics`;
           document.body.appendChild(a);
           a.click();
           a.remove();

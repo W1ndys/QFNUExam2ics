@@ -255,7 +255,7 @@ def main():
 
     # 解析数据并生成日历
     calendar = parse_exam_data(exam_response.text)
-    save_calendar_to_file(calendar, "2024_2025_1_exam_schedule.ics")
+    save_calendar_to_file(calendar, f"2024_2025_1_exam_schedule_{user_account}.ics")
 
     # 获取考试信息
     exam_info = get_exam_time_and_place(exam_response.text)
