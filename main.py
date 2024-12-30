@@ -179,23 +179,27 @@ def simulate_login(user_account, user_password):
         Exception: 当验证码错误时
     """
     session, cookies, data_str = get_initial_session()
-    random_code = handle_captcha(session, cookies)
-    print(f"验证码: {random_code}")
-    encoded = generate_encoded_string(data_str, user_account, user_password)
-    response = login(
-        session, cookies, user_account, user_password, random_code, encoded
-    )
 
-    # 检查响应状态码和内容
-    if response.status_code == 200:
+    for attempt in range(3):  # 尝试三次
+        random_code = handle_captcha(session, cookies)
+        print(f"验证码: {random_code}")
+        encoded = generate_encoded_string(data_str, user_account, user_password)
+        response = login(
+            session, cookies, user_account, user_password, random_code, encoded
+        )
 
-        if "验证码错误!!" in response.text:
-            raise Exception("验证码识别错误，请重试")
-        if "密码错误" in response.text:
-            raise Exception("用户名或密码错误")
-        return session, cookies
-    else:
-        raise Exception("登录失败")
+        # 检查响应状态码和内容
+        if response.status_code == 200:
+            if "验证码错误!!" in response.text:
+                print(f"验证码识别错误，重试第 {attempt + 1} 次")
+                continue  # 继续尝试
+            if "密码错误" in response.text:
+                raise Exception("用户名或密码错误")
+            return session, cookies
+        else:
+            raise Exception("登录失败")
+
+    raise Exception("验证码识别错误，请重试")
 
 
 def save_response_to_file(content, filename, description):
