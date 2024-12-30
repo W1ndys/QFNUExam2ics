@@ -59,3 +59,4 @@ def index():
 if __name__ == "__main__":
     print("当前版本: {}".format(__version__))
     app.run(host="0.0.0.0", port=5000, debug=False)
+    
