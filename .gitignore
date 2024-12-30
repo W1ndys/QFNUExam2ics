@@ -1,3 +1,5 @@
+*.ics
+*.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -170,6 +172,3 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-*.ics
-*user_credentials.txt
-*user_credentials_cleaned.txt
