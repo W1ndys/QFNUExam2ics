@@ -1,4 +1,3 @@
-import requests
 from main import get_exam_page, simulate_login
 from bs4 import BeautifulSoup
 

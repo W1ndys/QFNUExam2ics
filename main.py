@@ -8,7 +8,7 @@ from captcha_ocr import get_ocr_res
 import os
 from pytz import timezone
 from dotenv import load_dotenv
-from get_exam_info import get_exam_time_and_place
+
 
 load_dotenv()
 
@@ -102,6 +102,27 @@ def get_exam_page(session, cookies):
     """
     target_url = "http://zhjw.qfnu.edu.cn/jsxsd/xsks/xsksap_list?xqlbmc=&sxxnxq=&dqxnxq=&ckbz=&xnxqid=2024-2025-1&xqlb=#/"
     return session.get(target_url, cookies=cookies, timeout=1000)
+
+
+# 提取时间、考场、课程名称
+def get_exam_time_and_place(exam_page):
+    soup = BeautifulSoup(exam_page, "html.parser")
+    table = soup.find("table", {"id": "dataList"})
+    if not table:
+        print("未找到考试信息表格")
+        return []
+
+    exam_info = []
+
+    for row in table.find_all("tr")[1:]:  # 跳过表头
+        columns = row.find_all("td")
+        if len(columns) > 7:  # 确保行中有足够的列
+            course_name = columns[4].get_text(strip=True)
+            exam_time = columns[6].get_text(strip=True)
+            exam_place = columns[7].get_text(strip=True)
+            exam_info.append((course_name, exam_time, exam_place))
+
+    return exam_info
 
 
 def parse_exam_data(html_content):
