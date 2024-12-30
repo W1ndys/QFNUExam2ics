@@ -41,7 +41,6 @@ def get_exam_time_and_place(exam_page):
 if __name__ == "__main__":
     lines = read_user_credentials()
     i = 0
-    written_info = set()  # 用于存储已写入的信息
     while i < len(lines):
         try:
             username, password = get_user_credentials(lines[i : i + 3])
@@ -58,14 +57,9 @@ if __name__ == "__main__":
                     # 将信息写入文件
                     with open("exam_info.txt", "a", encoding="utf-8") as f:
                         for course, time, place in exam_info:
-                            info_line = (
+                            f.write(
                                 f"课程名称: {course}, 考试时间: {time}, 考场: {place}\n"
                             )
-                            if info_line not in written_info:
-                                f.write(info_line)
-                                written_info.add(info_line)
-                            else:
-                                print(f"重复信息: {info_line.strip()}")
                 else:
                     print(f"无法获取考试信息 {username} {password}")
             i += 3  # 跳过当前用户的三行
