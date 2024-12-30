@@ -5,6 +5,7 @@
 ![image](assets/image.png)
 
 ## 目录
+
 - [使用](#使用)
   - [控制台运行](#控制台运行)
   - [网页版](#网页版)
@@ -15,11 +16,13 @@
 ### 控制台运行
 
 1. **克隆项目**
+
    ```bash
    git clone https://github.com/W1ndys/QFNUExam2ics.git
    ```
 
 2. **安装依赖**
+
    ```bash
    pip install -r requirements.txt
    ```
@@ -32,11 +35,13 @@
 ### 网页版
 
 1. **安装依赖**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **运行脚本**
+
    ```bash
    python webserver.py
    ```
@@ -51,6 +56,7 @@
 根据你的系统选择构建运行脚本，这里以 Linux 为例：
 
 1. **构建并运行**
+
    ```bash
    sh linux_build_and_run.sh
    ```
