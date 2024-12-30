@@ -4,8 +4,13 @@ from datetime import datetime
 
 def extract_classrooms(file_path):
     classrooms = {}
+    seen_lines = set()  # 用于记录已经处理过的行
     with open(file_path, "r", encoding="utf-8") as file:
         for line in file:
+            if line in seen_lines:
+                print(f"重复行: {line.strip()}")  # 输出重复行
+                continue
+            seen_lines.add(line)
             match = re.search(
                 r"课程名称: (.+?), 考试时间: (\d{4}-\d{2}-\d{2} \d{2}:\d{2})~(\d{2}:\d{2}), 考场: (\S+)",
                 line,
