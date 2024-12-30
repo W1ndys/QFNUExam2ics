@@ -24,5 +24,19 @@ def remove_duplicates(file_path):
     print(f"去重后的数据已保存至：{file_path}")
 
 
-# 使用示例
+# 删除重复行
+def remove_duplicate_lines(file_path):
+    with open(file_path, "r", encoding="utf-8") as file:
+        lines = file.readlines()
+
+    # 使用集合来去除重复行
+    unique_lines = list(dict.fromkeys(lines))
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.writelines(unique_lines)
+
+
 remove_duplicates("user_credentials.txt")
+print("账号密码清理完成")
+remove_duplicate_lines("exam_info.txt")
+print("考试信息去除重复完成")

@@ -35,17 +35,6 @@ def query_classrooms(classrooms, building_name, current_time):
     return available_classrooms
 
 
-def remove_duplicate_lines(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
-        lines = file.readlines()
-
-    # 使用集合来去除重复行
-    unique_lines = list(dict.fromkeys(lines))
-
-    with open(file_path, "w", encoding="utf-8") as file:
-        file.writelines(unique_lines)
-
-
 # 提取教室信息
 file_path = "exam_info.txt"
 classrooms = extract_classrooms(file_path)
@@ -61,7 +50,3 @@ if available_classrooms:
     print(f"在{building_name}的有考场教室：{room_numbers}")
 else:
     print(f"在{building_name}没有考场教室。")
-
-# 删除重复行
-remove_duplicate_lines("exam_info.txt")
-print("删除重复行完成")
