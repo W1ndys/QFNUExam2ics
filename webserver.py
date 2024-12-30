@@ -5,7 +5,7 @@ from get_exam_info import get_exam_time_and_place
 app = Flask(__name__, static_folder="static")
 
 # 定义版本号
-__version__ = "2.0.1"
+__version__ = "2.0.2"
 
 
 @app.route("/api/login", methods=["POST"])
