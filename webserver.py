@@ -6,7 +6,7 @@ import os
 app = Flask(__name__, static_folder="static")
 
 # 定义版本号
-__version__ = "2.0.4"
+__version__ = "2.0.5"
 
 
 @app.route("/api/login", methods=["POST"])
