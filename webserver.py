@@ -1,11 +1,12 @@
 from flask import Flask, request, send_file, jsonify
 from main import simulate_login, get_exam_page, parse_exam_data, save_calendar_to_file
 from get_exam_info import get_exam_time_and_place
+import os
 
 app = Flask(__name__, static_folder="static")
 
 # 定义版本号
-__version__ = "2.0.3"
+__version__ = "2.0.4"
 
 
 @app.route("/api/login", methods=["POST"])
@@ -30,7 +31,9 @@ def login():
 
         # 解析数据并生成日历
         calendar = parse_exam_data(exam_response.text)
-        calendar_file = f"ics/2024_2025_1_exam_schedule_{user_account}.ics"
+        calendar_file = os.path.join(
+            "output_ics", f"2024_2025_1_exam_schedule_{user_account}.ics"
+        )
         save_calendar_to_file(calendar, calendar_file)
         # 获取考试信息
         exam_info = get_exam_time_and_place(exam_response.text)
